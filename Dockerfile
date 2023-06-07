@@ -1,3 +1,3 @@
-FROM my_first_image:latest
+FROM alpine:latest
 RUN apk update
 RUN apk add krb5
