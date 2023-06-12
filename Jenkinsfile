@@ -18,6 +18,10 @@ pipeline {
  IMAGE_REPO_NAME="test"
  IMAGE_TAG="latest"
  REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
+ //task_def_arn = "arn:aws:ecs:us-east-1:xxxxxxxxxxxx:task-definition/first-run-task-definition"
+ cluster = "Amey-test"
+ //exec_role_arn = "arn:aws:iam::xxxxxxxxxxxx:role/ecsTaskExecutionRole" 
+         
  }
  
 stages {
