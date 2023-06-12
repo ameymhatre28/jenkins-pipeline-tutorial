@@ -18,9 +18,9 @@ pipeline {
  IMAGE_REPO_NAME="test"
  IMAGE_TAG="latest"
  REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
- //task_def_arn = "arn:aws:ecs:us-east-1:xxxxxxxxxxxx:task-definition/first-run-task-definition"
+ task_def_arn = "arn:aws:ecs:ap-southeast-1:048134285155:task-definition/first-run-task-definition"
  cluster = "Amey-test"
- //exec_role_arn = "arn:aws:iam::xxxxxxxxxxxx:role/ecsTaskExecutionRole" 
+ exec_role_arn = "arn:aws:iam::048134285155:role/ecsTaskExecutionRole" 
          
  }
  
@@ -61,5 +61,15 @@ stages {
          }
         }
       }
+    stage('Deploy') {
+    steps {
+        // Override image field in taskdef file
+        sh "sed -i 's|{{image}}|${REPOSITORY_URI}:${commit_id}|' taskdef.json"
+        // Create a new task definition revision
+        sh "aws ecs register-task-definition --execution-role-arn ${exec_role_arn} --cli-input-json file://taskdef.json --region ${AWS_DEFAULT_REGION}"
+        // Update service on Fargate
+        sh "aws ecs update-service --cluster ${cluster} --service sample-app-service --task-definition ${task_def_arn} --region ${AWS_DEFAULT_REGION}"
+    }
+}
     }
 }
