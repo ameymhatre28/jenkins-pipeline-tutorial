@@ -64,7 +64,7 @@ stages {
     stage('Deploy') {
     steps {
         // Override image field in taskdef file
-        sh "sed -i 's|{{image}}|${REPOSITORY_URI}:${commit_id}|' taskdef.json"
+        sh "sed -i 's|{{image}}|${REPOSITORY_URI}:${IMAGE_TAG}|' taskdef.json"
         // Create a new task definition revision
         sh "aws ecs register-task-definition --execution-role-arn ${exec_role_arn} --cli-input-json file://taskdef.json --region ${AWS_DEFAULT_REGION}"
         // Update service on Fargate
