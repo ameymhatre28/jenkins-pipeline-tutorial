@@ -3,7 +3,7 @@
     "networkMode": "awsvpc",
     "containerDefinitions": [
         {
-            "name": "jenkins",
+            "name": "Jenkins",
             "image": "{{image}}",
             "portMappings": [
                 {
