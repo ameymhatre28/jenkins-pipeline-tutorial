@@ -1,2 +1,1 @@
-FROM alpine:latest
-
+FROM awsshanky03/jenkins:lts
