@@ -1,1 +1,1 @@
-FROM awsshanky03/jenkins:lts
+FROM jenkins/jenkins:lts
