@@ -28,7 +28,9 @@
                 }
             ],
             "essential": true
-            "mountPoints": [,
+            "environment": [],
+            "environmentFiles": [],
+            "mountPoints": [
                 {
                     "sourceVolume": "Jenkins",
                     "containerPath": "/var/jenkins_home",
