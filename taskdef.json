@@ -1,6 +1,21 @@
 {
     "family": "Jenkins",
     "networkMode": "awsvpc",
+     "volumes": [
+        {
+            "name": "Jenkins",
+            "efsVolumeConfiguration": {
+                "fileSystemId": "fs-0dad972ef22382751",
+                "rootDirectory": "/",
+                "transitEncryption": "ENABLED",
+                "transitEncryptionPort": 12000,
+                "authorizationConfig": {
+                    "accessPointId": "fsap-0f1d0eec5410b0084",
+                    "iam": "DISABLED"
+                }
+            }
+        }
+    ],
     "containerDefinitions": [
         {
             "name": "Jenkins",
@@ -13,6 +28,24 @@
                 }
             ],
             "essential": true
+            "mountPoints": [
+                {
+                    "sourceVolume": "Jenkins",
+                    "containerPath": "/var/jenkins_home",
+                    "readOnly": false
+                }
+            ],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/Jenkins",
+                    "awslogs-region": "ap-southeast-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
         }
     ],
     "requiresCompatibilities": [
