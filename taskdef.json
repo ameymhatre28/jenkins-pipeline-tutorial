@@ -1,21 +1,4 @@
 {
-    "family": "Jenkins",
-    "networkMode": "awsvpc",
-     "volumes": [
-        {
-            "name": "Jenkins",
-            "efsVolumeConfiguration": {
-                "fileSystemId": "fs-0dad972ef22382751",
-                "rootDirectory": "/",
-                "transitEncryption": "ENABLED",
-                "transitEncryptionPort": 12000,
-                "authorizationConfig": {
-                    "accessPointId": "fsap-0f1d0eec5410b0084",
-                    "iam": "DISABLED"
-                }
-            }
-        }
-    ],
     "containerDefinitions": [
         {
             "name": "Jenkins",
@@ -50,9 +33,61 @@
             }
         }
     ],
+    "family": "Jenkins",
+     "networkMode": "awsvpc",
+     "volumes": [
+        {
+            "name": "Jenkins",
+            "efsVolumeConfiguration": {
+                "fileSystemId": "fs-0dad972ef22382751",
+                "rootDirectory": "/",
+                "transitEncryption": "ENABLED",
+                "transitEncryptionPort": 12000,
+                "authorizationConfig": {
+                    "accessPointId": "fsap-0f1d0eec5410b0084",
+                    "iam": "DISABLED"
+                }
+            }
+        }
+    ],
+"status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "ecs.capability.efsAuth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.efs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.25"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    
     "requiresCompatibilities": [
         "FARGATE"
     ],
     "cpu": "512",
     "memory": "1024"
+"runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
 }
