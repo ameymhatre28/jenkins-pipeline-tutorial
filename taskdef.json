@@ -11,8 +11,6 @@
                 }
             ],
             "essential": true
-            "environment": [],
-            "environmentFiles": [],
             "mountPoints": [
                 {
                     "sourceVolume": "Jenkins",
