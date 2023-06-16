@@ -1,56 +1,52 @@
 {
-    "containerDefinitions": [
-        {
-            "name": "Jenkins",
-            "image": "{{image}}",
-            "portMappings": [
-                {
-                    "containerPort": 8080,
-                    "hostPort": 8080,
-                    "protocol": "tcp"
-                }
-            ],
-            "essential": true
-            "mountPoints": [
-                {
-                    "sourceVolume": "Jenkins",
-                    "containerPath": "/var/jenkins_home",
-                    "readOnly": false
-                }
-            ],
-            "volumesFrom": [],
-            "ulimits": [],
-            "logConfiguration": {
-                "logDriver": "awslogs",
-                "options": {
-                    "awslogs-create-group": "true",
-                    "awslogs-group": "/ecs/Jenkins",
-                    "awslogs-region": "ap-southeast-1",
-                    "awslogs-stream-prefix": "ecs"
-                }
+    "containerDefinitions": [{
+        "name": "Jenkins",
+        "image": "{{image}}",
+        "portMappings": [{
+            "containerPort": 8080,
+            "hostPort": 8080,
+            "protocol": "tcp"
+
+ 
+
+        }],
+        "essential": true,
+        "environment": [],
+        "environmentFiles": [],
+        "mountPoints": [{
+            "sourceVolume": "Jenkins",
+            "containerPath": "/var/jenkins_home",
+            "readOnly": false
+        }],
+        "volumesFrom": [],
+        "ulimits": [],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-create-group": "true",
+                "awslogs-group": "/ecs/Jenkins",
+                "awslogs-region": "ap-southeast-1",
+                "awslogs-stream-prefix": "ecs"
             }
         }
-    ],
+    }],
     "family": "Jenkins",
-     "networkMode": "awsvpc",
-     "volumes": [
-        {
-            "name": "Jenkins",
-            "efsVolumeConfiguration": {
-                "fileSystemId": "fs-0dad972ef22382751",
-                "rootDirectory": "/",
-                "transitEncryption": "ENABLED",
-                "transitEncryptionPort": 12000,
-                "authorizationConfig": {
-                    "accessPointId": "fsap-0f1d0eec5410b0084",
-                    "iam": "DISABLED"
-                }
+    "networkMode": "awsvpc",
+    "volumes": [{
+        "name": "Jenkins",
+        "efsVolumeConfiguration": {
+            "fileSystemId": "fs-0dad972ef22382751",
+            "rootDirectory": "/",
+            "transitEncryption": "ENABLED",
+            "transitEncryptionPort": 12000,
+            "authorizationConfig": {
+                "accessPointId": "fsap-0f1d0eec5410b0084",
+                "iam": "DISABLED"
             }
         }
-    ],
-"status": "ACTIVE",
-    "requiresAttributes": [
-        {
+    }],
+    "status": "ACTIVE",
+    "requiresAttributes": [{
             "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
         },
         {
@@ -78,14 +74,13 @@
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
         }
     ],
-    
+
+ 
+
     "requiresCompatibilities": [
         "FARGATE"
     ],
     "cpu": "512",
     "memory": "1024"
-"runtimePlatform": {
-        "cpuArchitecture": "X86_64",
-        "operatingSystemFamily": "LINUX"
-    },
 }
+
